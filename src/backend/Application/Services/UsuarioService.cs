@@ -19,6 +19,11 @@ namespace Application.Services
             this.Usuariorepository = Usuariorepository;
         }
 
+        public Task Delete(int id)
+        {
+            return Usuariorepository.Delete(id);
+        }
+
         public Task<Usuario> Find(int id)
         {
             return Usuariorepository.Find(id);
@@ -33,11 +38,15 @@ namespace Application.Services
         {
             return Usuariorepository.Insert(obj);
         }
-
      
         public async Task Update(int id, Usuario obj)
         {
             var objOri = Usuariorepository.Find(id).Result;
+            objOri.DataNascimento = obj.DataNascimento;
+            objOri.Email = obj.Email;
+            objOri.EscolaridadeId = obj.EscolaridadeId;
+            objOri.Nome = obj.Nome;
+            objOri.Sobrenome = obj.Sobrenome;
 
             await Usuariorepository.Update(objOri);
         }

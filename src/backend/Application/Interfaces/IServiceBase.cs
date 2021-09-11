@@ -13,6 +13,7 @@ namespace Application.Interfaces
         Task<TEntity> Insert(TEntity obj);
         Task<TEntity> Find(int id);
         Task Update(int id,TEntity obj);
+        Task Delete(int id);
         Task<IEnumerable<TEntity>> GetAll();
         Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate);
     }

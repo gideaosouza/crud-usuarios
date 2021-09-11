@@ -47,12 +47,16 @@ namespace Api
                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                    );
 
-
             services.AddTransient<IUsuarioService, UsuarioService>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
+            services.AddTransient<IEscolaridadeService, EscolaridadeService>();
+            services.AddTransient<IEscolaridadeRepository, EscolaridadeRepository>();
+
             services.AddMvc().AddFluentValidation();
+            
             services.AddTransient<IValidator<Usuario>, UsuarioValidator>();
+            services.AddTransient<IValidator<Escolaridade>, EscolaridadeValidator>();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
 
@@ -73,6 +77,8 @@ namespace Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("ApiCorsPolicy");
 
             app.UseRouting();
 

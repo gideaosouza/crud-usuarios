@@ -12,6 +12,7 @@ namespace Infrastructure.Repository.Interfaces
         Task<TEntity> Find(int id);
         Task<TEntity> Insert(TEntity entity);
         Task Update(TEntity entity);
+        Task Delete(int id);
 
         Task<IEnumerable<TEntity>> GetAll();
         Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate);

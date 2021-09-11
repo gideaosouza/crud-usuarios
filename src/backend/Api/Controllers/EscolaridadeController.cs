@@ -11,24 +11,22 @@ namespace Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UsuarioController : ControllerBase
+    public class EscolaridadeController : ControllerBase
     {
-        private readonly IUsuarioService usuarioService;
-       public UsuarioController(IUsuarioService usuarioService)
+        private readonly IEscolaridadeService escolaridadeService;
+       public EscolaridadeController(IEscolaridadeService escolaridadeService)
        {
-           this.usuarioService = usuarioService;
+           this.escolaridadeService = escolaridadeService;
        }
-
-
        
         /// <summary>
         /// Pode ser feito com Paginação
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public Task<IEnumerable<Usuario>> Get()
+        public Task<IEnumerable<Escolaridade>> Get()
         {
-            return usuarioService.GetAll();
+            return escolaridadeService.GetAll();
         }
        
         [HttpGet("{id}")]
@@ -39,17 +37,17 @@ namespace Api.Controllers
                 Response.StatusCode = 400;
                 return NotFound("Id não pode ser zero");
             }
-            return Ok(usuarioService.Find(id).Result);
+            return Ok(escolaridadeService.Find(id).Result);
         }
         
         [HttpPost]
-        public Task<Usuario> Post(Usuario obj)
+        public Task<Escolaridade> Post(Escolaridade obj)
         {
-            return usuarioService.Insert(obj);
+            return escolaridadeService.Insert(obj);
         }
        
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, Usuario obj)
+        public async Task<IActionResult> Put(int id, Escolaridade obj)
         {
             if (id == 0)
             {
@@ -57,10 +55,11 @@ namespace Api.Controllers
                 return NotFound();
             }
 
-            await usuarioService.Update(id, obj);
+            await escolaridadeService.Update(id, obj);
             return Ok();
         }
 
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -70,7 +69,7 @@ namespace Api.Controllers
                 return NotFound();
             }
 
-            await usuarioService.Delete(id);
+            await escolaridadeService.Delete(id);
             return Ok();
         }
     }

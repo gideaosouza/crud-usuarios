@@ -26,7 +26,23 @@ namespace Infrastructure.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Usuario>(new UsuarioMapping().Configure);
-            modelBuilder.Entity<Escolaridade>(new EscolaridadeMapping().Configure);            
+            modelBuilder.Entity<Escolaridade>(new EscolaridadeMapping().Configure);        
+            modelBuilder.Entity<Escolaridade>().HasData(
+                new Escolaridade{
+                    Id = 1,
+                    Descricao = "Ensino Fundamental"
+                },
+                new Escolaridade{
+                    Id = 2,
+                    Descricao = "Ensino Médio"
+                },
+                new Escolaridade{
+                    Id = 3,
+                    Descricao = "Ensino Superior"
+                }
+            );
+
+
         }
     }
 }

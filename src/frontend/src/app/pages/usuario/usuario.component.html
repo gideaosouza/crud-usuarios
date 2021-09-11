@@ -1,0 +1,79 @@
+<div class="p-3">
+    <h4 class="mx-auto">Cadastro de Usuários</h4>
+</div>
+<div class="row">
+    <!-- <input placeholder="Datepicker" type="text" class="form-control" bsDatepicker #dp="bsDatepicker"> -->
+
+    <div class="col-9">
+        <p *ngFor="let alert of alerts">
+            <alert [dismissible]="dismissible" (onClosed)="onClosed(alert)" type="danger">
+                <strong>Opa!</strong> {{ alert.message }}.
+              </alert>
+          </p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Nome</th>
+                    <th scope="col">Sobrenome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Escolaridade</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios;">
+                    <th scope="row">{{ usuario.id}}</th> 
+                    <td>{{ usuario.nome}}</td> 
+                    <td>{{ usuario.sobrenome}}</td> 
+                    <td>{{ usuario.email}}</td>                     
+                    <td>{{ usuario.escolaridade.descricao}}</td>      
+                    <td> 
+                        <button class="btn btn-primary btn-sm" (click)="update(usuario.id)">Editar</button> |
+                        <button class="btn btn-danger btn-sm" (click)="delete(usuario.id)">Deletar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-3">
+        <form [formGroup]="usuarioForm" (ngSubmit)="submitForm()">
+             <input type="text" formControlName="id" hidden>
+            <div class="form-group">
+                <label for="nomeInput">Nome</label>
+                <input type="text" formControlName="nome" class="form-control" id="nomeInput"
+                    placeholder="João da Silva Souza">
+            </div>
+            <div class="form-group">
+                <label for="enderecoInput">Sobrenome</label>
+                <input type="text" class="form-control" formControlName="sobrenome" id="enderecoInput" placeholder="Rua x Quadra n">
+            </div> 
+          
+            <div class="col-xs-12 col-12form-group mb-3">
+                <input type="text"
+                       formControlName="dataNascimento"
+                       placeholder="Data de nascimento"
+                       class="form-control"
+                       [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }"
+                       bsDatepicker>
+              </div>
+
+            <div class="form-group">
+                <label for="emailInput">Email</label>
+                <input type="e-mail" class="form-control" id="emailInput" formControlName="email" placeholder="exemplo@exemplo.com">
+            </div>
+
+            <div class="form-group">
+                <label for="escolaridadeInput">Escolaridade</label>
+                <select [(ngModel)]="escolaridadeValue" class="form-control" (change)="changeEscolaridade($event)" formControlName="escolaridadeId">
+                    <option value="0" selected disabled>Escolha uma escolaridade</option>
+                    <option *ngFor="let escolaridade of escolaridades" [value]="escolaridade.id | number">{{escolaridade.descricao}}</option>
+                 </select>
+            </div>
+     
+            
+            <button type="button" class="btn btn-danger" (click)="limpar()">Limpar</button>
+            <button type="submit" class="btn btn-primary float-right">Salvar</button>
+        </form>
+    </div>
+</div>

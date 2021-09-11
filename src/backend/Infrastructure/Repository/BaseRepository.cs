@@ -44,6 +44,13 @@ namespace Infrastructure.Repository{
         public virtual async Task<TEntity> Find(int id)
         {
             return await _efContext.Set<TEntity>().FirstOrDefaultAsync(c => c.Id == id).ConfigureAwait(false);
-        }        
+        }
+
+        public virtual async Task Delete(int id)
+        {
+            var obj = Find(id).Result;
+            _efContext.Set<TEntity>().Remove(obj);
+            await _efContext.SaveChangesAsync().ConfigureAwait(false); 
+        }
     }
 }
