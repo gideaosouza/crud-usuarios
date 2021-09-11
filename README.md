@@ -9,7 +9,10 @@ Minha escolha foi baseada em Clean DDD
 * Asp Core 3.1
 * Cors
 * EntityFrameworkCore
-* Swagger
+* Swagger 
+```
+https://localhost:5001/Swagger/
+```
 * FluentValidation
 * Repository Pattern
 * DI Pattern
