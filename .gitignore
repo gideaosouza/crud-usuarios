@@ -1,0 +1,9 @@
+src/backend/.vscode
+src/backend/Api/bin/
+src/backend/Api/obj/
+src/backend/Application/bin/
+src/backend/Application/obj/
+src/backend/Domain/bin/
+src/backend/Domain/obj/
+src/backend/Infrastructure/bin/
+src/backend/Infrastructure/obj/
