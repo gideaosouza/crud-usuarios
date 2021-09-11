@@ -62,7 +62,24 @@ namespace Api
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
+                  c.SwaggerDoc("v1",
+                    new OpenApiInfo
+                    {
+                        Title = "Crud Usuarios",
+                        Version = "v1",
+                        Description = "Crud Usuarios",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Gideão Souza",
+                            Url = new Uri("https://github.com/gideaosouza"),
+                            Email = "gideao_souza@outlook.com"
+                        }
+                    }
+                    );
+                // Set the comments path for the Swagger JSON and UI.**
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
         }
 
